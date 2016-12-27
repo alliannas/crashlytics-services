@@ -67,6 +67,7 @@ class Service::Asana < Service::Base
 
   def create_task(project, issue)
     workspace_id = project['data']['workspace']['id']
+    project_id = project['data']['id']
 
     response = http_post("#{asana_url}/tasks") do |request|
       request.headers.merge!(request_headers)
@@ -75,7 +76,8 @@ class Service::Asana < Service::Base
           :workspace => workspace_id,
           :name => issue[:title],
           :notes => create_notes(issue),
-          :assignee => 'me'
+          :assignee => 'me',
+          :projects => [project_id]
         }
       }.to_json
     end
