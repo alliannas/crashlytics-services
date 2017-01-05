@@ -94,7 +94,7 @@ describe Service::Asana, :type => :service do
 
       it 'should create a new Asana task' do
         stub_request(:post, "https://key:@app.asana.com/api/1.0/tasks").
-        and_return(:status => 200, :body => '')
+          and_return(:status => 200, :body => '')
 
         service.receive_issue_impact_change issue
         expect(logger).to have_received(:log).with('issue_impact_change successful')
@@ -121,8 +121,8 @@ describe Service::Asana, :type => :service do
         }
 
         stub_request(:post, "https://key:@app.asana.com/api/1.0/tasks").
-        with(:body => expected_task_body).
-        to_return(:status => 200, :body => "")
+          with(:body => expected_task_body).
+          to_return(:status => 200, :body => "")
      
         service.receive_issue_impact_change issue
         expect(logger).to have_received(:log).with('issue_impact_change successful')
